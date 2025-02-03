@@ -1,0 +1,129 @@
+import pyautogui
+import keyboard  # To detect key presses
+from PIL import ImageGrab  # To capture the screen and get pixel colors
+import time
+# Specify the coordinates for which we want RGB values
+time.sleep(5)
+
+def check():
+    coor = [
+            [None, None], 
+            [None, None],
+            [None, None],
+            [None, None]]
+
+    left = [(619, 450), (619, 350), (619, 250),(619, 153)]
+    right = [(742, 450),(742, 350), (742, 250),(744, 153)]
+    colors = [(139, 68, 32), (133, 63, 29), (147, 75, 35), (149, 77, 35), (211, 135, 85), (140, 62, 29),  (128, 59, 28), (211, 135, 85), (167, 92, 42), (211, 135, 85), (167, 92, 42), (204, 128, 78), (211, 135, 85), (199, 123, 73), (69, 19, 22), (137, 63, 31), (198, 122, 72), (158, 85, 39), (152, 79, 36), (122, 54, 26), (158, 85, 39), (124, 55, 26), (152, 79, 36)]
+    screen = ImageGrab.grab()
+    
+    for i in range(4):
+        colorl = screen.getpixel(left[i])
+        if colorl in colors:
+            coor[i][0] = 1
+        else:  
+            coor[i][0] = 0      
+
+        colorr = screen.getpixel(right[i])
+        if colorr in colors:
+            coor[i][1] = 1
+        else:   
+            coor[i][1] = 0    
+    print(coor)
+    hitfive(coor)
+
+
+
+last = False
+
+def hitfive(cor):
+    global last
+    for i in range(4):
+        if cor[i][0] == 0 and cor[i][1] == 0:
+            if last == True:
+                pyautogui.click(770, 431)
+                time.sleep(0.025)
+                pyautogui.click(770, 431)
+                print("right")
+                time.sleep(0.025)
+            
+            else:
+                
+                pyautogui.click(633, 491)
+                time.sleep(0.025)
+                pyautogui.click(633, 491)
+                print("left")
+                time.sleep(0.025)
+
+        elif cor[i][0] == 0 and cor[i][1] == 1:
+                pyautogui.click(633, 491)
+                time.sleep(0.025)
+                pyautogui.click(633, 491)
+                print("left")
+                time.sleep(0.025)
+                last = False
+        
+        else:
+            pyautogui.click(770, 431)
+            time.sleep(0.025)
+            pyautogui.click(770, 431)
+            print("right")
+            time.sleep(0.025)
+            
+            last = True
+
+        if i == 3:
+            time.sleep(0.4)
+    check()
+
+check()
+
+
+'''
+
+
+
+
+
+color[1][i].
+        color_left = screen.getpixel((653, 451))
+        if 
+
+def click_left():
+    screen = ImageGrab.grab()
+    color_left = screen.getpixel((653, 451))
+    if color_left in [(169, 95, 46), (209, 134, 85), (132, 65, 33), (73, 24, 27)]:
+        click_right()
+
+    else:
+        pyautogui.click(653, 451)
+        time.sleep(0.3)
+        click_left()
+
+
+#left: (169, 95, 46), (169, 95, 46), 
+
+def click_right():
+    screen = ImageGrab.grab()
+    color_right = screen.getpixel((708, 451))
+    if color_right in [(169, 95, 46), (209, 134, 85), (132, 65, 33), (73, 24, 27)]:
+        click_left()
+
+    else:
+        pyautogui.click(708, 451)
+        time.sleep(0.3)
+        click_right()
+
+
+click_left()
+
+    screen = ImageGrab.grab()
+    color_to_check = screen.getpixel((708, 451))
+    if distance <= tolerance:
+        click_left
+
+    else:
+        pyautogui.click(708, 451)
+        time.sleep(0.1)
+        click_right()
+'''
